@@ -1,0 +1,586 @@
+// Variables
+$grey_main: rgb(30,30,30);
+$grey_secondary: rgb(20, 20, 20);
+$white: rgb(230, 230, 230);
+$green: rgb(30, 130, 10);
+$green_light: rgb(11, 211, 77);
+$font_def: 10px;
+
+//Functions
+
+@function font_alter($alter){
+    @return $font_def + $alter;
+}
+
+// Mixins
+@mixin background{
+	height: auto;
+	width: 100%;
+	background-size: cover;
+}
+
+@mixin title{
+    color: $white;
+    font-size: 50px;
+    text-align: center;
+}
+
+@mixin subtitle {
+    color: $white;
+    font-size: 35px;
+    text-align: center;
+}
+
+@mixin text_coding{
+    color: $white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+@mixin percentage_text {
+    float: right;
+    margin-right: 3%;
+    font-size: 18px;
+    color: $grey_main;
+}
+
+@mixin percentage_graphics {
+    height: 100%;
+    border-radius: 50px;
+    background-color: $green_light;
+}
+
+// Classes
+.cleaner{
+    clear: both;
+}
+
+.region{
+    width: 100%;
+    border-bottom-left-radius: 100px 100px;
+    border-bottom-right-radius: 100px 100px;
+    padding-top: 80px;
+    border-bottom: 15px solid $grey_main;
+    padding-bottom: 50px;
+}
+
+.nav_buttons{
+    width: 50%;
+    height: 80px;
+    margin: 0px auto;
+    border-radius: 50px;
+    background-color: $grey_main;
+}
+
+.skill{
+    width: 45%;
+    height: auto;
+    border-radius: 30px;
+    background-color: $grey_main;
+}
+
+.el_skill{
+    @include text_coding();
+    width: 80%;
+    height: 30px;
+    margin: 30px auto;
+}
+
+.el_engine{
+    width: 35%;
+    height: auto;
+    border-radius: 50px;
+    background-color: $grey_secondary;
+}
+
+.meter{
+    width: 70%;
+    height: 20px;
+    background-color: $green;
+    border-radius: 50px;
+    margin-top: 5px;
+    float:right;
+}
+
+.question{
+    margin-bottom: 20px;
+}
+
+// Main
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+body{
+    background-color: $grey_main;
+}
+
+#wrapper{
+    width: 75%;
+    height: auto;
+    margin: 0px auto;
+    background-color: $grey_secondary;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    border-bottom-left-radius: 100px 100px;
+    border-bottom-right-radius: 100px 100px;
+    //Header
+    header{   
+        border-bottom-left-radius: 60% 35%;
+        border-bottom-right-radius: 60% 35%;
+        @include background();
+        height: 600px;
+        width: 100%;
+        background-image: url('../images/bg_header.jpg');
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        padding-top: 30px;
+        padding-bottom: 0px;
+        nav{
+            ul{
+                list-style: none;
+                display: flex;
+                justify-content:space-evenly;
+                padding-top: 18px;
+            }
+            i{
+                font-size: 40px;
+	            color: $white;
+            }
+            i:hover{
+                color: $green;
+                transition: 0.5s;
+            }
+        }
+        #author{
+            width: 450px;
+            height: 450px;
+            margin: 30px auto;
+            img{
+                width: 90%;
+                height: 90%;
+                border: 5px solid $grey_main;
+                border-radius: 50%;
+                display: block;
+                margin: 0px auto;
+            }
+            #potpis{
+                width: 400px;
+                height: 110px;
+                background-color: $grey_main;
+                text-align: center;
+                position: relative;
+                border-radius: 50px;
+                top: -120px;
+                left: -35px;
+                transform: rotate(10deg);
+                h1{
+                    @include title();
+                    display:inline-block;
+                    line-height: -5px;
+                    border-bottom: 3px solid $white;
+                }
+                h2{
+                    @include subtitle();
+                }
+            }
+        }
+    }
+    //Skills and Services
+    #skills_services{
+        height: auto;
+        h2{
+            @include title();
+            margin-bottom: 50px;
+        }
+        #skills{
+            width: 100%;
+            height: auto;
+            margin: 0px auto;
+            display: flex;
+            justify-content: space-evenly;
+            padding-bottom: 100px;
+            #coding{
+                h3{
+                    @include subtitle();
+                    margin-top: 20px;
+                }
+                .el_skill{
+                    p{
+                        float:left;
+                    }              
+                    .meter{
+                        $sizes: 75, 90, 60, 85;
+                        @each $size in $sizes{
+                            #c-#{$size}{
+                                width: $size * 1%;
+                                @include percentage_graphics();
+                                p{
+                                    @include percentage_text();
+                                }
+                            }
+                        }  
+                    }
+                }
+            }
+            #engines{
+                h3{
+                    @include subtitle();
+                    margin-top: 20px;
+                }
+                #engine_group{
+                    width: 90%;
+                    height: auto;
+                    margin: 10px auto;
+                    display: flex;
+                    justify-content: space-around;
+                    .el_engine{
+                        p{
+                            @include text_coding();
+                            text-align: center;
+                            margin-top: 10px;
+                        }
+                        img{
+                            width: 100px;
+                            height: 100px;
+                            display: block;
+                            margin: 10px auto;
+                        }
+                        .color_text{
+                            color: $green;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        #services{
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            text-align: center;
+            $i: 1;
+            @while($i<=4){
+                #service#{$i}{
+                    width: 22%;
+                    height: auto;
+                    border-radius: 50px;
+                    background-color: $grey_main;
+                    i{
+                        font-size: 50px;
+                        color: $white;
+                        margin-top: 30px;
+                    }
+                    p{
+                        font-size: 20px;
+                        color: $white;
+                        padding: 10px 15px 20px 15px;
+                    }
+                    .color_text{
+                        @include text_coding();
+                        color: $green;
+                        margin-top: 20px;
+                        padding-bottom: 10px;
+                    }
+                }
+            $i:$i+1;
+            }
+        }
+    }
+    //Projects
+    #projects{
+        //margin-top: 50px;
+        h2{
+            @include title();
+        }
+        #proj_holder{
+            width: 90%;
+            margin: 0px auto;
+            margin-top: 50px;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            //margin-bottom: 100px;
+            @for $i from 1 through 2{
+                #proj#{$i}{
+                    width: 45%;
+                    height: auto;
+                    background-color: $grey_main;
+                    border-radius: 50px;
+                    padding-bottom: 10px;
+                    h3{
+                        @include subtitle();
+                        margin: 20px 0px;
+                    }
+                    #el_proj#{$i}{
+                        background-size: cover;
+                        width: 90%;
+                        border-radius: 50px;
+                        margin: 0px auto;
+                        margin-bottom: 20px;
+                        padding:50px 0px;
+                        @if($i==1){
+                            background-image: url('../images/floppy.png');
+                        }
+                        @else if($i==2){
+                            background-image: url('../images/strategy.png');
+                        }
+                        #desc_proj#{$i}{
+                            opacity: 0;
+                            transition: 0.5s;
+                            width:80%;
+                            height: auto;
+                            margin: 0px auto;
+                            border-radius: 50px;
+                            background-color: rgba(40,40,40,0.95);
+                            text-align: center;
+                            p{
+                                @include text_coding();
+                                padding: 20px 10px 10px 10px;
+                            }
+                            a{
+                                text-decoration: none;
+                                @include text_coding();
+                                display: inline-block;
+                                color: $green;
+                                padding-bottom: 20px;
+                            }
+                            a:hover{
+                                color: $green_light;
+                            }
+                        }
+                    }
+                    #el_proj#{$i}:hover{
+                        #desc_proj#{$i}{
+                            opacity: 1;
+                            transition: 0.5s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //About
+    #about{
+        h2{
+            @include title();
+            margin-bottom: 50px;
+        }
+        #insanity_holder{
+            width: 90%;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0px auto;
+            #bio{
+                width: 40%;
+                height: auto;
+                padding: 20px;
+                text-align: justify;
+                border-radius: 50px;
+                background-color: $grey_main;
+                p{
+                    @include text_coding();
+                    font-size: 20px;
+                    margin-top: 20px;
+                }
+            }
+            #edu{
+                width: 40%;
+                height: auto;
+                background-color: $grey_main;
+                border-radius: 50px;
+                table{
+                    margin: 0px auto;
+                    text-align: center;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    thead{
+                        tr{
+                            th{
+                                @include text_coding();
+                                font-size: 30px;
+                                color: $green_light;
+                                padding-bottom: 10px;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr:nth-child(odd){
+                            td{
+                                color: $white;
+                                font-size: 20px;
+                                font-weight: bold;
+                            }
+                        }
+                        tr:nth-child(even){
+                            td{
+                                color: $green;
+                                font-size: 20px;
+                                font-weight: bold;
+                                padding-bottom: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //Contact
+    #contact{
+        width: 100%;
+        h2{
+            @include title();
+        }
+        #cont_holder{
+            width: 90%;
+            height: auto;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0px auto;
+            margin-top: 50px;
+            #send{
+                width: 40%;
+                height: auto;
+                background-color: $grey_main;
+                border-radius: 50px;
+                text-align: center;
+                .question{
+                    margin-top: 20px;
+                    display: block;
+                    label{
+                        display: block;
+	                    @include text_coding();
+                        color: $green;
+                    }
+                    input[type="text"]{
+                        background-color: $grey_secondary;
+                        width: 50%;
+                        border-radius: 50px;
+                        font-size: 20px;
+                        color: $white;
+                        text-align: center;
+                    }
+                    textarea{
+                        background-color: $grey_secondary;
+                        border-radius: 10px;
+                        width: 80%;
+                        height: 100px;
+                        font-size: 20px;
+                        color: $white;
+                    }
+                    textarea::placeholder{
+                        padding-left: 5px;
+                        font-size: 20px;
+                        color: $white;
+                    }
+                    input[type="submit"]{
+                        width: 100px;
+                        height: 40px;
+                        background-color: rgb(59, 59, 59);
+                        color: $white;
+                        border-radius: 50px;
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                    input[type="submit"]:hover{
+                        transition: 0.5s;
+                        color: $green;
+                    }
+                    input[type="reset"]{
+                        width: 100px;
+                        height: 40px;
+                        background-color: rgb(59, 59, 59);
+                        color: $white;
+                        border-radius: 50px;
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                    input[type="reset"]:hover{
+                        transition: 0.5s;
+                        color: $green;
+                    }
+                }
+            }
+            #info{
+                width: 40%;
+                height: 290px;
+                background-color: $grey_main;
+                border-radius: 50px;
+                table{
+                    margin: 0px auto;
+                    text-align: center;
+                    padding: 20px 0px;
+                    thead{
+                        tr{
+                            th{
+                                font-size: font_alter(20px);
+                                color: $green_light;
+                                padding-bottom: 10px;
+                            }
+                        }
+                    }
+                    tbody{
+                        tr:nth-child(odd){
+                            td{
+                                color: $white;
+                                font-size: font_alter(10px);
+                                font-weight: bold;
+                            }
+                        }
+                        tr:nth-child(even){
+                            td{
+                                color: $green;
+                                font-size: font_alter(10px);
+                                font-weight: bold;
+                                padding-bottom: 5px;
+                                a{
+                                    text-decoration: none;
+                                    color: $green;
+                                    i{
+                                        font-size: 30px;
+                                        padding-top: 10px;
+                                    }    
+                                }
+                                a:hover{
+                                    color: $green_light;
+                                    transition: 0.5s;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //Footer
+    footer{
+        border-bottom: none;
+        padding-top: 50px;
+        nav{
+            ul{
+                list-style: none;
+                display: flex;
+                justify-content:space-evenly;
+                padding-top: 25px;
+                li{
+                    a{
+                        text-decoration: none;
+                        @include text_coding();
+                        display: block;
+                        color: $white;
+                        padding-bottom: 20px;
+                    }
+                    a:hover{
+                        color: $green;
+                        transition: 0.5s;
+                    }
+                }
+            }
+        }
+    }
+}
